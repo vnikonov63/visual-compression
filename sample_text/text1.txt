@@ -1,0 +1,3 @@
+In ASCII we trust! 12345 ~!@#$%^&*()_+ 
+This sentence includes letters, numbers, punctuation, and spaces. 
+Nothing fancy here, just plain text with no extended Unicode characters.
