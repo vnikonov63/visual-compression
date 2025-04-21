@@ -1,4 +1,5 @@
 #include <QFile>
+#include <QSize>
 #include <string>
 #include <map>
 
@@ -27,13 +28,17 @@ struct Comparator {
     }
 };
 
-class HuffmanTree
-{
+class HuffmanTree {
 public:
     HuffmanTree(const QFile& inputFile);
     Node* GetRoot() {return root;}
+    QSize ComputeScreenDimensions();
+    int GetHeight();
 private:
     Node* root;
+    int  HeightRec(Node* root);
 };
+
+
 
 #endif // HUFFMANTREE_H

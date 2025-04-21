@@ -1,7 +1,9 @@
 #include "huffmantree.h"
-#include <fstream>   // for std::ifstream, std::ofstream
-#include <iostream>  // for std::cerr
-#include <queue>     // for std::priority_queue
+#include <fstream>
+#include <iostream>
+#include <queue>
+#include <algorithm>
+#include <cmath>
 
 void populateCodes(Node* root, const string& prefix, map<char, string>& codes) {
     if (!root) return;
@@ -56,3 +58,27 @@ HuffmanTree::HuffmanTree(const QFile& inputFile)
     root = pq.top();
     pq.pop();
 }
+
+QSize HuffmanTree::ComputeScreenDimensions() {
+    int height = GetHeight();
+    if (height == 0) return {0, 0};
+
+    int leafCount = 1 << (height - 1);
+    return QSize{leafCount, height};
+}
+
+int HuffmanTree::HeightRec(Node* root) {
+    if (root == nullptr) {
+        return 0;
+    }
+
+    int leftSubHeight = HeightRec(root->left_);
+    int rightSubHeight = HeightRec(root->right_);
+
+    return std::max(leftSubHeight, rightSubHeight) + 1;
+}
+
+int HuffmanTree::GetHeight() {
+    return HeightRec(root);
+}
+

@@ -26,7 +26,9 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::paintEvent(QPaintEvent*) {
-    if (!fileSet || ht == nullptr) return;
+    if (!fileSet || ht == nullptr) {
+        return;
+    }
 
     QPainter painter(this);
 
