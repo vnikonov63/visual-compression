@@ -2,7 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QScrollArea>
+
 #include <huffmantree.h>
+#include <huffmantreewidget.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,13 +20,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void paintEvent(QPaintEvent*);
     void SlotClickExport();
-    void drawNode(QPainter& painter, Node* node, int x, int y, int xOffset, int yOffset, QString code);
 
 private:
     Ui::MainWindow *ui;
     bool fileSet = false;
-    HuffmanTree* ht;
+    HuffmanTree* ht_;
+    HuffmanTreeWidget* htw_;
+    QScrollArea* scrollArea_;
+
 };
 #endif // MAINWINDOW_H
