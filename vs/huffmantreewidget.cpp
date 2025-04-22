@@ -27,6 +27,7 @@ void HuffmanTreeWidget::setTree(HuffmanTree* ht) {
 }
 
 void HuffmanTreeWidget::paintEvent(QPaintEvent*) {
+    info_regions_.clear();
     if (ht_ == nullptr || ht_->GetRoot() == nullptr) {
         return;
     }
@@ -82,14 +83,12 @@ void HuffmanTreeWidget::drawNode(QPainter& painter, Node* node, int x, int y, in
 }
 
 void HuffmanTreeWidget::mouseMoveEvent(QMouseEvent* ev) {
-    QPoint currentPosition = ev->pos();
-
     bool insideRect = false;
 
     for (const auto& region : info_regions_) {
-        if (region.rect.contains(currentPosition) ) {
-            QPoint arrowPos = region.rect.center() + QPoint(0, 16);
-            QToolTip::showText(arrowPos, region.text, this);
+        if (region.rect.contains(ev->pos()) ) {
+            QPoint globalTip = mapToGlobal(region.rect.center() + QPoint(0,20));
+            QToolTip::showText(globalTip, region.text, this);
             insideRect = true;
             break;
         }
